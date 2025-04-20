@@ -3,6 +3,16 @@
 @tailwind utilities;
 
 @layer base {
+  /* Mobile-friendly tooltip */
+  .group:active .group-hover\:visible {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .group:active .group-hover\:opacity-100 {
+    opacity: 1;
+  }
+  
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
