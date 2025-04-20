@@ -1,6 +1,6 @@
 
 // API endpoints for currency conversion
-const EXCHANGE_RATE_API_URL = "/api/exchange-rate";
+const EXCHANGE_RATE_API_URL = "https://open.er-api.com/v6/latest/USD";
 
 interface ExchangeRateResponse {
   rate: number;
