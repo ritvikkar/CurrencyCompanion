@@ -1,24 +1,22 @@
 // API endpoints for currency conversion
-const EXCHANGE_RATE_API_ENDPOINT = "https://api.exchangerate.host/latest";
+const EXCHANGE_RATE_API_ENDPOINT = "/api/exchange-rate";
 
 interface ExchangeRateResponse {
-  rates: {
-    [currency: string]: number;
-  };
-  base: string;
-  date: string;
-}
-
-interface ParsedExchangeRate {
   rate: number;
   timestamp: string;
   base: string;
+  nextUpdate?: string;
+  provider?: string;
+  fallback?: boolean;
 }
 
-// Function to fetch the exchange rate from INR to USD
+// Define the type for our exchange rate response
+export type ParsedExchangeRate = ExchangeRateResponse;
+
+// Function to fetch the exchange rate from the backend
 export async function fetchExchangeRate(): Promise<ParsedExchangeRate> {
   try {
-    const response = await fetch(`${EXCHANGE_RATE_API_ENDPOINT}?base=USD&symbols=INR`);
+    const response = await fetch(EXCHANGE_RATE_API_ENDPOINT);
     
     if (!response.ok) {
       throw new Error(`Error fetching exchange rate: ${response.status}`);
@@ -26,11 +24,8 @@ export async function fetchExchangeRate(): Promise<ParsedExchangeRate> {
     
     const data: ExchangeRateResponse = await response.json();
     
-    return {
-      rate: data.rates.INR,
-      timestamp: new Date().toISOString(),
-      base: data.base,
-    };
+    // Return the parsed data
+    return data;
   } catch (error) {
     console.error("Failed to fetch exchange rate:", error);
     throw error;

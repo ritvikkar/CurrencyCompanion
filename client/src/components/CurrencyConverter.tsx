@@ -158,7 +158,7 @@ export default function CurrencyConverter() {
       {/* Footer */}
       <div className="mt-6 text-center">
         <p className="text-sm text-gray-500">
-          Exchange rates provided by <a href="https://exchangerate.host" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">exchangerate.host</a>
+          Exchange rates provided by <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">ExchangeRate-API.com</a>
         </p>
       </div>
     </div>

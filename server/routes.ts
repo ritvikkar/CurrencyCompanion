@@ -6,27 +6,35 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Exchange rate API endpoint
   app.get("/api/exchange-rate", async (req, res) => {
     try {
-      // The API now requires an access key
-      // Use fallback data with a note indicating API key is needed
-      console.log("Using fallback exchange rate - API key required for live data");
+      // Using ExchangeRate-API.com's free tier API (no key required)
+      const response = await fetch("https://open.er-api.com/v6/latest/USD");
       
-      // Return a fallback value with current timestamp
+      if (!response.ok) {
+        throw new Error(`Exchange rate API error: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log("Exchange rate API response received");
+      
+      // Verify data structure
+      if (data.result !== "success" || !data.rates || !data.rates.INR) {
+        throw new Error("Invalid response format from exchange rate API");
+      }
+      
+      // Return the processed data
       res.json({
-        rate: 83.25, // Current approximate INR/USD rate as fallback
-        timestamp: new Date().toISOString(),
-        base: "USD",
-        fallback: true,
-        message: "Using fallback rate - API key required for live data"
+        rate: data.rates.INR,
+        timestamp: new Date(data.time_last_update_utc).toISOString(),
+        base: data.base_code,
+        nextUpdate: data.time_next_update_utc,
+        provider: data.provider
       });
       
-      // Note: When API key is available, replace with actual API call:
-      // const response = await fetch("https://api.exchangerate.host/latest?access_key=YOUR_API_KEY&base=USD&symbols=INR");
-      
     } catch (error) {
-      console.error("Error in exchange rate endpoint:", error);
+      console.error("Error fetching exchange rate:", error);
       // Return a fallback value in case of error
       res.json({
-        rate: 83.25, // Fallback exchange rate
+        rate: 85.49, // Current fallback rate (April 2025)
         timestamp: new Date().toISOString(),
         base: "USD",
         fallback: true

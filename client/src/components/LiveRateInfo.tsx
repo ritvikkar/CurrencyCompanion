@@ -13,24 +13,24 @@ export default function LiveRateInfo({ rate, isLoading, isError, timestamp }: Li
   
   // Determine API status
   let statusColor = "bg-green-500";
-  let statusText = "API connected";
+  let statusText = "Live exchange rate";
   
   if (isLoading) {
     statusColor = "bg-yellow-500";
     statusText = "Loading exchange rates...";
   } else if (isError) {
     statusColor = "bg-red-500";
-    statusText = "API disconnected - using fallback rates";
+    statusText = "Using fallback rates";
   }
   
   return (
     <div className="bg-blue-50 rounded-lg p-3 border border-blue-100">
       <div className="flex flex-col justify-between">
         <div>
-          <h3 className="text-xs font-medium text-gray-700 mb-1">Live Exchange Rate Status</h3>
+          <h3 className="text-xs font-medium text-gray-700 mb-1">Exchange Rate Status</h3>
         </div>
         <div className="text-xs text-gray-500 mb-1">
-          {isLoading ? "Updating..." : `Updated: ${formattedTimestamp}`}
+          {isLoading ? "Updating..." : `Last updated: ${formattedTimestamp}`}
         </div>
       </div>
       <div className="flex items-center">
