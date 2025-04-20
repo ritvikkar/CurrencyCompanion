@@ -39,9 +39,22 @@ export default function LiveRateInfo({ rate, isLoading, isError, timestamp }: Li
       </div>
       
       {isError && (
-        <div className="mt-2 flex items-center text-xs text-red-600">
-          <AlertCircle className="h-3 w-3 mr-1" />
-          <span>Could not connect to exchange rate API. Using fallback rate.</span>
+        <div className="mt-2 space-y-1">
+          <div className="flex items-center text-xs text-red-600">
+            <AlertCircle className="h-3 w-3 mr-1" />
+            <span>Could not connect to exchange rate API. Using fallback rate.</span>
+          </div>
+          <div className="text-xs text-gray-500">
+            <span>Possible causes:</span>
+            <ul className="list-disc ml-4 mt-1">
+              <li>CORS policy blocking the request</li>
+              <li>Rate limit exceeded (100 requests/month for free tier)</li>
+              <li>API service temporarily unavailable</li>
+            </ul>
+          </div>
+          <div className="text-xs text-gray-500">
+            Using fallback rate: 1 USD = ₹{rate.toFixed(2)} INR
+          </div>
         </div>
       )}
     </div>

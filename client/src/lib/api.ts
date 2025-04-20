@@ -33,12 +33,17 @@ export async function fetchExchangeRate(): Promise<ParsedExchangeRate> {
       provider: data.provider
     };
   } catch (error) {
-    console.error("Failed to fetch exchange rate:", error);
+    console.error("Failed to fetch exchange rate:", {
+      error,
+      message: error instanceof Error ? error.message : 'Unknown error',
+      timestamp: new Date().toISOString()
+    });
     return {
       rate: 85.49, // Fallback rate
       timestamp: new Date().toISOString(),
       base: "USD",
-      fallback: true
+      fallback: true,
+      error: error instanceof Error ? error.message : 'Unknown error'
     };
   }
 }
