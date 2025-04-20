@@ -15,7 +15,7 @@ enum Direction {
 
 export default function CurrencyConverter() {
   // State for input values
-  const [inrValue, setInrValue] = useState<number>(10000);
+  const [inrValue, setInrValue] = useState<number | null>(10000);
   const [usdValue, setUsdValue] = useState<number | null>(null);
   
   // State for PPE rate
@@ -51,13 +51,13 @@ export default function CurrencyConverter() {
 
   // Handle INR input change
   const handleInrChange = (value: number | null) => {
-    setInrValue(value || 0);
+    setInrValue(value);
     setDirection(Direction.INRtoUSD);
   };
 
   // Handle USD input change
   const handleUsdChange = (value: number | null) => {
-    setUsdValue(value || 0);
+    setUsdValue(value);
     setDirection(Direction.USDtoINR);
   };
 
@@ -67,17 +67,17 @@ export default function CurrencyConverter() {
   };
 
   // Calculate PPE conversion values
-  const usdValuePPE = inrValue / ppeRate;
-  const inrValuePPE = usdValue ? usdValue * ppeRate : 0;
+  const usdValuePPE = inrValue !== null ? inrValue / ppeRate : null;
+  const inrValuePPE = usdValue !== null ? usdValue * ppeRate : null;
 
   // Prepare result texts based on direction
   const forexResultText = direction === Direction.INRtoUSD 
-    ? `₹${formatCurrency(inrValue, "INR")} = $${formatCurrency(usdValue || 0)}`
-    : `$${formatCurrency(usdValue || 0)} = ₹${formatCurrency(inrValue, "INR")}`;
+    ? `₹${inrValue !== null ? formatCurrency(inrValue, "INR") : "0.00"} = $${usdValue !== null ? formatCurrency(usdValue) : "0.00"}`
+    : `$${usdValue !== null ? formatCurrency(usdValue) : "0.00"} = ₹${inrValue !== null ? formatCurrency(inrValue, "INR") : "0.00"}`;
   
   const ppeResultText = direction === Direction.INRtoUSD
-    ? `₹${formatCurrency(inrValue, "INR")} = $${formatCurrency(usdValuePPE)}`
-    : `$${formatCurrency(usdValue || 0)} = ₹${formatCurrency(inrValuePPE, "INR")}`;
+    ? `₹${inrValue !== null ? formatCurrency(inrValue, "INR") : "0.00"} = $${usdValuePPE !== null ? formatCurrency(usdValuePPE) : "0.00"}`
+    : `$${usdValue !== null ? formatCurrency(usdValue) : "0.00"} = ₹${inrValuePPE !== null ? formatCurrency(inrValuePPE, "INR") : "0.00"}`;
 
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden p-6">
