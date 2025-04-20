@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import CurrencyInput from "./CurrencyInput";
 import LiveRateInfo from "./LiveRateInfo";
 import PPESettings from "./PPESettings";
-import ConversionResults from "./ConversionResults";
+import ResultCard from "./ResultCard";
 import { useQuery } from "@tanstack/react-query";
 import { fetchExchangeRate } from "@/lib/api";
 import { formatCurrency } from "@/lib/utils";
@@ -110,27 +110,50 @@ export default function CurrencyConverter() {
         </div>
       </div>
       
-      {/* Live Rate Info */}
-      <LiveRateInfo 
-        rate={forexRate} 
-        isLoading={isLoading} 
-        isError={isError} 
-        timestamp={exchangeRateData?.timestamp} 
-      />
-      
-      {/* PPE Settings */}
-      <PPESettings 
-        ppeRate={ppeRate} 
-        onPPERateChange={handlePPERateChange} 
-      />
-      
       {/* Conversion Results */}
-      <ConversionResults 
-        forexResult={forexResultText}
-        ppeResult={ppeResultText}
-        forexRate={forexRate}
-        ppeRate={ppeRate}
-      />
+      <div className="mb-8">
+        <h2 className="text-lg font-medium text-gray-800 mb-4">Conversion Results</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Forex Result Card with Rate Info Below */}
+          <div className="space-y-4">
+            <ResultCard
+              type="forex"
+              resultText={forexResultText}
+              rateText={`1 USD = ₹${forexRate.toFixed(2)} INR`}
+              description="Based on current exchange rate"
+            />
+            
+            {/* Live Rate Info below Forex Card */}
+            <div className="mt-2">
+              <LiveRateInfo 
+                rate={forexRate} 
+                isLoading={isLoading} 
+                isError={isError} 
+                timestamp={exchangeRateData?.timestamp} 
+              />
+            </div>
+          </div>
+          
+          {/* PPE Result Card with Settings Below */}
+          <div className="space-y-4">
+            <ResultCard
+              type="ppe"
+              resultText={ppeResultText}
+              rateText={`1 USD = ₹${ppeRate.toFixed(2)} INR (PPE)`}
+              description="Based on purchasing power equivalent"
+            />
+            
+            {/* PPE Settings below PPE Card */}
+            <div className="mt-2">
+              <PPESettings 
+                ppeRate={ppeRate} 
+                onPPERateChange={handlePPERateChange} 
+              />
+            </div>
+          </div>
+        </div>
+      </div>
       
       {/* Footer */}
       <div className="mt-6 text-center">

@@ -20,26 +20,20 @@ export default function LiveRateInfo({ rate, isLoading, isError, timestamp }: Li
     statusText = "Loading exchange rates...";
   } else if (isError) {
     statusColor = "bg-red-500";
-    statusText = "API disconnected - using cached rates";
+    statusText = "API disconnected - using fallback rates";
   }
   
   return (
-    <div className="bg-gray-50 rounded-lg p-4 mb-6">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+    <div className="bg-blue-50 rounded-lg p-3 border border-blue-100">
+      <div className="flex flex-col justify-between">
         <div>
-          <h2 className="text-sm font-medium text-gray-700 mb-1">Live Exchange Rate</h2>
-          <p className="text-lg font-semibold text-gray-900">
-            1 USD = ₹{rate.toFixed(2)} INR
-          </p>
+          <h3 className="text-xs font-medium text-gray-700 mb-1">Live Exchange Rate Status</h3>
         </div>
-        <div className="mt-2 sm:mt-0">
-          <p className="text-xs text-gray-500">
-            {isLoading ? "Updating..." : `Updated on ${formattedTimestamp}`}
-          </p>
-          <p className="text-xs text-gray-500">Source: exchangerate.host</p>
+        <div className="text-xs text-gray-500 mb-1">
+          {isLoading ? "Updating..." : `Updated: ${formattedTimestamp}`}
         </div>
       </div>
-      <div className="mt-2 flex items-center">
+      <div className="flex items-center">
         <span className={`inline-block h-2 w-2 rounded-full ${statusColor} mr-2`}></span>
         <span className="text-xs text-gray-600">{statusText}</span>
       </div>
