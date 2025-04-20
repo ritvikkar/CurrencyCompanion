@@ -3,6 +3,7 @@ import { formatDate, formatCurrency } from "@/lib/utils";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { ParsedExchangeRate } from "@/lib/api";
 
 interface LiveRateInfoProps {
   rate: number;
@@ -10,6 +11,7 @@ interface LiveRateInfoProps {
   isError: boolean;
   timestamp?: string;
   onRateOverride?: (rate: number | null) => void;
+  exchangeRateData?: ParsedExchangeRate;
 }
 
 export default function LiveRateInfo({ 
@@ -17,7 +19,8 @@ export default function LiveRateInfo({
   isLoading, 
   isError, 
   timestamp,
-  onRateOverride
+  onRateOverride,
+  exchangeRateData
 }: LiveRateInfoProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [customRate, setCustomRate] = useState<string>(rate.toFixed(2));
@@ -159,19 +162,22 @@ export default function LiveRateInfo({
       )}
       
       {isRateOverridden && onRateOverride && !isEditing && (
-        <div className="mt-2 flex items-center justify-between">
-          <div className="text-[10px] sm:text-xs text-purple-600">
-            Using custom rate: 1 USD = ₹{formatCurrency(parseFloat(customRate), "INR")}
+        <div className="mt-3 p-2 bg-purple-50 rounded-md border border-purple-100">
+          <div className="flex items-center justify-between">
+            <div className="text-[10px] sm:text-xs text-purple-700">
+              Using custom rate: 1 USD = ₹{formatCurrency(parseFloat(customRate), "INR")}
+            </div>
+            <Button 
+              size="sm" 
+              variant="outline" 
+              className="h-6 px-2 text-[10px] sm:text-xs text-blue-600 border-blue-200 hover:bg-blue-50" 
+              onClick={resetToLiveRate}
+            >
+              <RefreshCw className="h-3 w-3 mr-1" />
+              <span className="inline">Return to Live Rate</span>
+            </Button>
           </div>
-          <Button 
-            size="sm" 
-            variant="ghost" 
-            className="h-5 px-1 text-[10px] text-blue-600" 
-            onClick={resetToLiveRate}
-          >
-            <RefreshCw className="h-3 w-3 mr-1" />
-            <span className="hidden sm:inline">Reset</span>
-          </Button>
+          <p className="mt-1 text-[9px] sm:text-[10px] text-gray-500">Current market rate: 1 USD = ₹{formatCurrency(exchangeRateData?.rate || 83, "INR")} INR</p>
         </div>
       )}
       

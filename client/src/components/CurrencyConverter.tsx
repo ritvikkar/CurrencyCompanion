@@ -154,6 +154,7 @@ export default function CurrencyConverter() {
                 isError={isError} 
                 timestamp={exchangeRateData?.timestamp}
                 onRateOverride={handleRateOverride}
+                exchangeRateData={exchangeRateData}
               />
             </div>
           </div>
