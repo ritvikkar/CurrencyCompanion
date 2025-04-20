@@ -89,7 +89,7 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <div className="absolute left-0 top-6 p-2 w-[calc(100vw-2rem)] sm:w-64 max-w-xs bg-white rounded-md shadow-lg border border-gray-200 text-xs text-gray-700 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-          The relative rate adjusts the conversion based on the actual purchasing power in each country. Unlike the market exchange rate, it accounts for local price differences and cost of living variations.
+          While the market exchange rate tells you how much ₹80,000 converts to in USD, it doesn't tell you if that amount provides the same standard of living in both countries. The relative rate shows how much money you would need in the US to buy the same things you could buy in India, accounting for local price differences and cost of living.
         </div>
       </div>
       <div className="flex flex-col gap-3 sm:gap-4">
@@ -145,7 +145,7 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <div className="absolute left-0 top-6 p-2 w-[calc(100vw-2rem)] sm:w-64 max-w-xs bg-white rounded-md shadow-lg border border-gray-200 text-[10px] sm:text-xs text-gray-700 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-              These are category-specific relative rates that reflect how prices differ between the US and India for particular types of goods and services. Select the category most relevant to your needs.
+              Different goods and services have different purchasing power ratios between countries. For example, ₹10 might buy the same amount of food in India as $1 in the US, but for electronics, the ratio might be closer to the market rate. Select the category that's most relevant to your comparison.
             </div>
           </div>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">

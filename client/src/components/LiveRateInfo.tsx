@@ -40,7 +40,7 @@ export default function LiveRateInfo({ rate, isLoading, isError, timestamp }: Li
             </svg>
           </div>
           <div className="absolute left-0 top-6 p-2 w-[calc(100vw-2rem)] sm:w-64 max-w-xs bg-white rounded-md shadow-lg border border-gray-200 text-[10px] sm:text-xs text-gray-700 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-            This shows the real-time exchange rate from a financial data provider. The market exchange rate is what banks and currency exchanges use for transactions. It fluctuates based on global economic factors and market conditions.
+            This shows the real-time market exchange rate, which tells you how currencies trade in global markets. While it accurately converts money values, it doesn't tell you if ₹80,000 in India would buy you the same goods and services as $1,000 in the US. For that information, see the Relative Rate conversion.
           </div>
         </div>
         <div className="text-[10px] sm:text-xs text-gray-500 mb-1 sm:mb-2">

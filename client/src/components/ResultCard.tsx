@@ -21,8 +21,8 @@ export default function ResultCard({
   
   // Tooltip text based on type
   const tooltipText = type === "forex" 
-    ? "The official market exchange rate between currencies." 
-    : "The adjusted rate that reflects actual purchasing power parity based on local prices and cost differences in various spending categories.";
+    ? "The market exchange rate used by banks and currency exchanges. While it tells you how currencies convert, it doesn't reveal if the converted amount buys the same goods and services in both countries." 
+    : "This shows what your money is actually worth in terms of purchasing power. It tells you how much money you would need in each country to maintain the same standard of living, accounting for different prices of goods and services.";
   
   // Split the result text to highlight the converted amount
   const [source, target] = resultText.split(" = ");
