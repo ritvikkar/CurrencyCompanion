@@ -7,17 +7,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/exchange-rate", async (req, res) => {
     try {
       // Using ExchangeRate-API.com's free tier API (no key required)
-      const response = await fetch("https://open.er-api.com/v6/latest/USD");
+      const response = await fetch("https://open.er-api.com/v6/latest/USD", {
+        timeout: 5000, // 5 second timeout
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
       
       if (!response.ok) {
+        console.error(`Exchange rate API error: Status ${response.status}, ${await response.text()}`);
         throw new Error(`Exchange rate API error: ${response.status}`);
       }
       
       const data = await response.json();
-      console.log("Exchange rate API response received");
+      console.log("Exchange rate API response received:", data);
       
       // Verify data structure
       if (data.result !== "success" || !data.rates || !data.rates.INR) {
+        console.error("Invalid API response format:", data);
         throw new Error("Invalid response format from exchange rate API");
       }
       
