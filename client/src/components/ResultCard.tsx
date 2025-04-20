@@ -29,7 +29,7 @@ export default function ResultCard({
       </h3>
       <div className="mb-2">
         <p className="text-lg font-semibold text-gray-900">
-          <span className="text-gray-600">{source}</span> = <span className={textColor}>{target}</span>
+          <span className="text-gray-600">{source}</span> <span className="px-2">=</span> <span className={textColor}>{target}</span>
         </p>
         <p className="text-xs text-gray-500">{description}</p>
       </div>
@@ -37,7 +37,9 @@ export default function ResultCard({
         <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 ${iconColor}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <span className="text-xs text-gray-600">{rateText}</span>
+        <span className="text-xs text-gray-600">
+          {rateText.replace(" = ", " ").split("=").join(" = ")}
+        </span>
       </div>
     </div>
   );
