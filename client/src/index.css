@@ -60,4 +60,14 @@
   input[type=number] {
     -moz-appearance: textfield;
   }
+  
+  /* Enhanced slider thumb styles */
+  [id="ppe-slider"] > span > span > span {
+    @apply transition-all duration-200 ease-in-out cursor-pointer;
+  }
+  
+  [id="ppe-slider"] > span > span > span:hover {
+    @apply scale-110 shadow-md bg-purple-600;
+    transform: scale(1.2);
+  }
 }

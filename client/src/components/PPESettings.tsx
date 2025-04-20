@@ -81,7 +81,7 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
               type="number"
               min={1}
               max={100}
-              className="pl-16 pr-12 py-2 h-8 text-sm"
+              className="pl-16 pr-12 py-2 h-8 text-sm cursor-pointer"
               value={inputValue}
               onChange={handleInputChange}
             />
@@ -99,7 +99,7 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
             step={1}
             value={[ppeRate]}
             onValueChange={handleSliderChange}
-            className="w-full"
+            className="w-full cursor-pointer"
           />
           <div className="flex justify-between text-xs text-gray-500 mt-2">
             <span>₹1</span>
