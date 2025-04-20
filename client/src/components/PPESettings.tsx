@@ -117,7 +117,7 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
               variant="outline"
               className={`text-xs py-1 px-3 h-6 rounded-md border-purple-300 transition-all duration-300 ease-in-out transform cursor-pointer ${
                 selectedPreset === preset.label
-                  ? "bg-purple-600 text-white border-purple-700 hover:bg-purple-700 hover:shadow-md hover:scale-105 hover:-translate-y-0.5" 
+                  ? "bg-purple-600 text-white border-purple-700 hover:bg-purple-800 hover:text-gray-50 hover:shadow-md hover:scale-105 hover:-translate-y-0.5" 
                   : "bg-white text-purple-600 hover:bg-purple-50 hover:text-purple-800 hover:border-purple-400 hover:shadow hover:scale-105 hover:-translate-y-0.5"
               }`}
               onClick={() => handlePresetChange(preset)}
