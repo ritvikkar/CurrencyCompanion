@@ -19,7 +19,7 @@ export default function CurrencyConverter() {
   const [usdValue, setUsdValue] = useState<number | null>(null);
   
   // State for PPE rate
-  const [ppeRate, setPpeRate] = useState<number>(24);
+  const [ppeRate, setPpeRate] = useState<number>(20);
   
   // Track which input was last modified
   const [direction, setDirection] = useState<Direction>(Direction.INRtoUSD);

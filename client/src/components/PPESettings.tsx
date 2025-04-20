@@ -15,16 +15,16 @@ type PresetOption = {
 };
 
 const PRESETS: PresetOption[] = [
-  { label: "📦 General Goods (Average)", value: 24 },
-  { label: "🧾 Salary", value: 24 },
-  { label: "🏠 Housing & Rent", value: 40 },
-  { label: "🍽️ Food & Dining", value: 20 },
-  { label: "🚗 Transportation", value: 22 },
-  { label: "🛋️ Furniture & Household", value: 35 },
+  { label: "📦 General Goods (Average)", value: 20 },
+  { label: "🧾 Salary", value: 10 },
+  { label: "🏠 Housing & Rent", value: 10 },
+  { label: "🍽️ Food & Dining", value: 10 },
+  { label: "🚗 Transportation", value: 15 },
+  { label: "🛋️ Furniture & Household", value: 20 },
   { label: "💻 Electronics & Imports", value: 80 },
-  { label: "🏥 Healthcare & Education", value: 18 },
-  { label: "🧹 Domestic Help", value: 18 },
-  { label: "👗 Clothing & Apparel", value: 28 },
+  { label: "🏥 Healthcare & Education", value: 10 },
+  { label: "🧹 Domestic Help", value: 7 },
+  { label: "👗 Clothing & Apparel", value: 20 },
   { label: "🛍️ Luxury Goods & Travel", value: 80 }
 ];
 
@@ -35,7 +35,7 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
   // Update the input field when ppeRate prop changes
   // Set General Goods as the default selection when component loads
   useEffect(() => {
-    if (ppeRate === 24) {
+    if (ppeRate === 20) {
       setSelectedPreset("📦 General Goods (Average)");
     }
   }, []);
