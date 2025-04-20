@@ -149,10 +149,11 @@ export default function CurrencyConverter() {
             {/* Live Rate Info below Forex Card */}
             <div className="mt-4">
               <LiveRateInfo 
-                rate={forexRate} 
+                rate={customRateOverride !== null ? customRateOverride : (exchangeRateData?.rate || 83)}
                 isLoading={isLoading} 
                 isError={isError} 
-                timestamp={exchangeRateData?.timestamp} 
+                timestamp={exchangeRateData?.timestamp}
+                onRateOverride={handleRateOverride}
               />
             </div>
           </div>
