@@ -122,15 +122,20 @@ export default function LiveRateInfo({
           </div>
           <div className="flex items-center space-x-1">
             <div className="relative flex-1">
-              <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500 text-[10px] sm:text-xs">1 USD = ₹</span>
+              <div className="absolute inset-y-0 left-0 pl-2 sm:pl-3 flex items-center pointer-events-none">
+                <span className="text-gray-500 text-[10px] sm:text-xs">1 USD =</span>
+              </div>
               <Input
                 type="number"
                 step="0.01"
                 min="0.01"
-                className="pl-14 h-7 text-xs"
+                className="pl-12 sm:pl-14 pr-10 h-7 text-xs"
                 value={customRate}
                 onChange={handleInputChange}
               />
+              <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                <span className="text-gray-500 text-[10px] sm:text-xs">INR</span>
+              </div>
             </div>
             <Button 
               size="sm" 
