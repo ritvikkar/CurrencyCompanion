@@ -1,27 +1,72 @@
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Check, X, Edit, RefreshCw } from "lucide-react";
 import { formatDate, formatCurrency } from "@/lib/utils";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 interface LiveRateInfoProps {
   rate: number;
   isLoading: boolean;
   isError: boolean;
   timestamp?: string;
+  onRateOverride?: (rate: number | null) => void;
 }
 
-export default function LiveRateInfo({ rate, isLoading, isError, timestamp }: LiveRateInfoProps) {
+export default function LiveRateInfo({ 
+  rate, 
+  isLoading, 
+  isError, 
+  timestamp,
+  onRateOverride
+}: LiveRateInfoProps) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [customRate, setCustomRate] = useState<string>(rate.toFixed(2));
+  const [isRateOverridden, setIsRateOverridden] = useState(false);
+  
   const formattedTimestamp = timestamp ? formatDate(new Date(timestamp)) : "Unknown";
   
   // Determine API status
   let statusColor = "bg-green-500";
   let statusText = "Live exchange rate";
   
-  if (isLoading) {
+  if (isRateOverridden) {
+    statusColor = "bg-purple-500";
+    statusText = "Using custom rate";
+  } else if (isLoading) {
     statusColor = "bg-yellow-500";
     statusText = "Loading exchange rates...";
   } else if (isError) {
     statusColor = "bg-red-500";
     statusText = "Using fallback rates";
   }
+  
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCustomRate(e.target.value);
+  };
+  
+  const applyCustomRate = () => {
+    const parsedRate = parseFloat(customRate);
+    if (!isNaN(parsedRate) && parsedRate > 0) {
+      if (onRateOverride) {
+        onRateOverride(parsedRate);
+        setIsRateOverridden(true);
+        setIsEditing(false);
+      }
+    }
+  };
+  
+  const resetToLiveRate = () => {
+    if (onRateOverride) {
+      onRateOverride(null);
+      setIsRateOverridden(false);
+      setCustomRate(rate.toFixed(2));
+    }
+  };
+  
+  const cancelEditing = () => {
+    setIsEditing(false);
+    setCustomRate(rate.toFixed(2));
+  };
   
   return (
     <div className="bg-blue-50 rounded-lg p-3 sm:p-4 border border-blue-100">
@@ -52,12 +97,79 @@ export default function LiveRateInfo({ rate, isLoading, isError, timestamp }: Li
           )}
         </div>
       </div>
-      <div className="flex items-center">
-        <span className={`inline-block h-1.5 sm:h-2 w-1.5 sm:w-2 rounded-full ${statusColor} mr-1 sm:mr-2`}></span>
-        <span className="text-[10px] sm:text-xs text-gray-600">{statusText}</span>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center">
+          <span className={`inline-block h-1.5 sm:h-2 w-1.5 sm:w-2 rounded-full ${statusColor} mr-1 sm:mr-2`}></span>
+          <span className="text-[10px] sm:text-xs text-gray-600">{statusText}</span>
+        </div>
+        {onRateOverride && !isEditing && (
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="h-5 px-1 sm:px-2 text-[10px] sm:text-xs text-blue-600" 
+            onClick={() => setIsEditing(true)}
+          >
+            <Edit className="h-3 w-3 sm:h-3.5 sm:w-3.5 mr-1" />
+            <span className="hidden sm:inline">Custom Rate</span>
+          </Button>
+        )}
       </div>
       
-      {isError && (
+      {isEditing && onRateOverride && (
+        <div className="mt-3 space-y-2 bg-white p-2 rounded-md border border-blue-200">
+          <div className="text-[10px] sm:text-xs font-medium text-gray-700">
+            Enter custom rate for airports/exchange offices:
+          </div>
+          <div className="flex items-center space-x-1">
+            <div className="relative flex-1">
+              <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500 text-[10px] sm:text-xs">1 USD = ₹</span>
+              <Input
+                type="number"
+                step="0.01"
+                min="0.01"
+                className="pl-14 h-7 text-xs"
+                value={customRate}
+                onChange={handleInputChange}
+              />
+            </div>
+            <Button 
+              size="sm" 
+              className="h-7 w-7 p-0 bg-green-500 hover:bg-green-600" 
+              onClick={applyCustomRate}
+            >
+              <Check className="h-3 w-3" />
+            </Button>
+            <Button 
+              size="sm" 
+              variant="outline" 
+              className="h-7 w-7 p-0 border-red-200 text-red-500" 
+              onClick={cancelEditing}
+            >
+              <X className="h-3 w-3" />
+            </Button>
+          </div>
+          <p className="text-[9px] sm:text-[10px] text-gray-500">This will override the market rate for all conversions</p>
+        </div>
+      )}
+      
+      {isRateOverridden && onRateOverride && !isEditing && (
+        <div className="mt-2 flex items-center justify-between">
+          <div className="text-[10px] sm:text-xs text-purple-600">
+            Using custom rate: 1 USD = ₹{formatCurrency(parseFloat(customRate), "INR")}
+          </div>
+          <Button 
+            size="sm" 
+            variant="ghost" 
+            className="h-5 px-1 text-[10px] text-blue-600" 
+            onClick={resetToLiveRate}
+          >
+            <RefreshCw className="h-3 w-3 mr-1" />
+            <span className="hidden sm:inline">Reset</span>
+          </Button>
+        </div>
+      )}
+      
+      {isError && !isRateOverridden && (
         <div className="mt-3 sm:mt-4 space-y-1 sm:space-y-2">
           <div className="flex items-center text-[10px] sm:text-xs text-red-600">
             <AlertCircle className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 flex-shrink-0" />

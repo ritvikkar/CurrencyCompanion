@@ -35,8 +35,16 @@ export default function CurrencyConverter() {
     staleTime: 1000 * 60 * 5, // Refresh every 5 minutes
   });
 
-  // Get the exchange rate from the API response
-  const forexRate = exchangeRateData?.rate || 83; // Fallback to a default value if API fails
+  // State for custom rate override
+  const [customRateOverride, setCustomRateOverride] = useState<number | null>(null);
+  
+  // Get the exchange rate from the API response or use custom override
+  const forexRate = customRateOverride !== null ? customRateOverride : (exchangeRateData?.rate || 83); // Fallback to a default value if API fails
+  
+  // Handle custom rate override
+  const handleRateOverride = (rate: number | null) => {
+    setCustomRateOverride(rate);
+  };
 
   // Calculate conversions when inputs or rates change
   useEffect(() => {
