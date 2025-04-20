@@ -88,7 +88,7 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <div className="absolute left-0 top-6 sm:left-full sm:top-0 sm:ml-2 p-2 w-[calc(100vw-2rem)] sm:w-64 bg-white rounded-md shadow-lg border border-gray-200 text-xs text-gray-700 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+        <div className="absolute left-0 top-6 p-2 w-[calc(100vw-2rem)] sm:w-64 max-w-xs bg-white rounded-md shadow-lg border border-gray-200 text-xs text-gray-700 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
           The relative rate adjusts the conversion based on the actual purchasing power in each country. Unlike the market exchange rate, it accounts for local price differences and cost of living variations.
         </div>
       </div>
