@@ -34,26 +34,26 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
   };
   
   return (
-    <div className="bg-purple-50 rounded-lg p-3 border border-purple-100">
-      <h3 className="text-xs font-medium text-gray-700 mb-2">
+    <div className="bg-purple-50 rounded-lg p-4 border border-purple-100">
+      <h3 className="text-xs font-medium text-gray-700 mb-4">
         Adjust PPE Rate
       </h3>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-4">
         <div className="relative">
           <div className="relative rounded-md shadow-sm">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <span className="text-gray-500 text-xs">1 USD <span className="px-1">=</span></span>
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <span className="text-gray-500 text-xs">1 USD <span className="px-4">=</span></span>
             </div>
             <Input
               id="ppe-rate"
               type="number"
               min={1}
               max={100}
-              className="pl-16 pr-12 py-1 h-8 text-sm"
+              className="pl-20 pr-12 py-2 h-8 text-sm"
               value={inputValue}
               onChange={handleInputChange}
             />
-            <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+            <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
               <span className="text-gray-500 text-xs">INR</span>
             </div>
           </div>
@@ -68,14 +68,14 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
             onValueChange={handleSliderChange}
             className="w-full"
           />
-          <div className="flex justify-between text-xs text-gray-500 mt-1">
+          <div className="flex justify-between text-xs text-gray-500 mt-2">
             <span>₹1</span>
             <span>₹50</span>
             <span>₹100</span>
           </div>
         </div>
       </div>
-      <p className="text-xs text-gray-500 mt-2">Default: 24 INR per 1 USD</p>
+      <p className="text-xs text-gray-500 mt-4">Default: 24 INR per 1 USD</p>
     </div>
   );
 }

@@ -82,40 +82,44 @@ export default function CurrencyConverter() {
     : `$${usdValue !== null ? formatCurrency(usdValue) : "0.00"} = ₹${inrValuePPE !== null ? formatCurrency(inrValuePPE, "INR") : "0.00"}`;
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden p-6">
-      <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">INR/USD Currency Converter</h1>
+    <div className="bg-white rounded-xl shadow-md overflow-hidden p-8">
+      <h1 className="text-2xl font-bold text-center mb-8 text-gray-800">INR/USD Currency Converter</h1>
       
       {/* Input Section */}
       <div className="mb-8">
-        <div className="flex flex-col md:flex-row gap-4">
-          <CurrencyInput
-            label="Indian Rupee (₹)"
-            symbol="₹"
-            value={inrValue}
-            onValueChange={handleInrChange}
-          />
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          <div className="md:col-span-2">
+            <CurrencyInput
+              label="Indian Rupee (₹)"
+              symbol="₹"
+              value={inrValue}
+              onValueChange={handleInrChange}
+            />
+          </div>
           
-          {/* Direction Indicator */}
+          {/* Direction Indicator - Centered */}
           <div className="flex items-center justify-center">
-            <div className="p-2 bg-gray-100 rounded-full">
+            <div className="p-4 bg-gray-100 rounded-full">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
               </svg>
             </div>
           </div>
           
-          <CurrencyInput
-            label="US Dollar ($)"
-            symbol="$"
-            value={usdValue}
-            onValueChange={handleUsdChange}
-          />
+          <div className="md:col-span-2">
+            <CurrencyInput
+              label="US Dollar ($)"
+              symbol="$"
+              value={usdValue}
+              onValueChange={handleUsdChange}
+            />
+          </div>
         </div>
       </div>
       
       {/* Conversion Results */}
       <div className="mb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mx-auto max-w-4xl">
           {/* Forex Result Card with Rate Info Below */}
           <div className="space-y-4">
             <ResultCard
@@ -126,7 +130,7 @@ export default function CurrencyConverter() {
             />
             
             {/* Live Rate Info below Forex Card */}
-            <div className="mt-2">
+            <div className="mt-4">
               <LiveRateInfo 
                 rate={forexRate} 
                 isLoading={isLoading} 
@@ -146,7 +150,7 @@ export default function CurrencyConverter() {
             />
             
             {/* PPE Settings below PPE Card */}
-            <div className="mt-2">
+            <div className="mt-4">
               <PPESettings 
                 ppeRate={ppeRate} 
                 onPPERateChange={handlePPERateChange} 
