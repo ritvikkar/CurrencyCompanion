@@ -74,23 +74,21 @@ export default function LiveRateInfo({
   return (
     <div className="bg-blue-50 rounded-lg p-3 sm:p-4 border border-blue-100">
       <div className="flex flex-col justify-between">
-        <div className="flex items-center">
-          <h3 className="text-[10px] sm:text-xs font-medium text-gray-700 mb-1 sm:mb-2">Exchange Rate Status</h3>
-          <div className="relative">
-            <div className="group">
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-3 w-3 sm:h-3.5 sm:w-3.5 ml-1 cursor-help opacity-70 text-blue-500 mb-1 sm:mb-2 hover:opacity-100 transition-opacity" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div className="absolute left-0 sm:left-auto sm:right-0 top-5 p-2 w-[calc(100vw-2rem)] sm:w-64 max-w-xs bg-white rounded-md shadow-lg border border-gray-200 text-[10px] sm:text-xs text-gray-700 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                This shows the real-time market exchange rate, which tells you how currencies trade in global markets. While it accurately converts money values, it doesn't tell you if ₹80,000 in India would buy you the same goods and services as $1,000 in the US. For that information, see the Relative Rate conversion.
-              </div>
-            </div>
+        <div className="relative group">
+          <div className="flex items-center">
+            <h3 className="text-[10px] sm:text-xs font-medium text-gray-700 mb-1 sm:mb-2">Exchange Rate Status</h3>
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-3 w-3 sm:h-3.5 sm:w-3.5 ml-1 cursor-help opacity-70 text-blue-500 mb-1 sm:mb-2" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div className="absolute left-0 top-6 p-2 w-[calc(100vw-2rem)] sm:w-64 max-w-xs bg-white rounded-md shadow-lg border border-gray-200 text-[10px] sm:text-xs text-gray-700 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            This shows the real-time market exchange rate, which tells you how currencies trade in global markets. While it accurately converts money values, it doesn't tell you if ₹80,000 in India would buy you the same goods and services as $1,000 in the US. For that information, see the Relative Rate conversion.
           </div>
         </div>
         <div className="text-[10px] sm:text-xs text-gray-500 mb-1 sm:mb-2">
