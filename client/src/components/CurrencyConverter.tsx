@@ -115,8 +115,6 @@ export default function CurrencyConverter() {
       
       {/* Conversion Results */}
       <div className="mb-8">
-        <h2 className="text-lg font-medium text-gray-800 mb-4">Conversion Results</h2>
-        
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Forex Result Card with Rate Info Below */}
           <div className="space-y-4">
@@ -158,12 +156,7 @@ export default function CurrencyConverter() {
         </div>
       </div>
       
-      {/* Footer */}
-      <div className="mt-6 text-center">
-        <p className="text-sm text-gray-500">
-          Exchange rates provided by <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">ExchangeRate-API.com</a>
-        </p>
-      </div>
+
     </div>
   );
 }

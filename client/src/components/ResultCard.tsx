@@ -25,7 +25,7 @@ export default function ResultCard({
   return (
     <div className={`bg-gradient-to-br ${gradientColors} rounded-lg border p-4`}>
       <h3 className="text-sm font-medium text-gray-700 mb-2">
-        {type === "forex" ? "Forex Rate Conversion" : "PPE Conversion"}
+        {type === "forex" ? "Exchange Rate" : "Purchasing Power Equivalent"}
       </h3>
       <div className="mb-2">
         <p className="text-lg font-semibold text-gray-900">
