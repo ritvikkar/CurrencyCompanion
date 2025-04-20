@@ -67,22 +67,6 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
           </div>
         </div>
         
-        {/* PPE presets */}
-        <div className="flex flex-wrap gap-2">
-          <Button 
-            size="sm"
-            variant="outline"
-            className={`text-xs py-1 px-2 h-6 rounded border-purple-300 ${
-              ppeRate === 24 
-                ? "bg-purple-100 text-purple-700 border-purple-400" 
-                : "bg-white text-purple-600 hover:bg-purple-50"
-            }`}
-            onClick={() => handlePresetChange(24)}
-          >
-            General Goods (Average)
-          </Button>
-        </div>
-        
         <div className="w-full">
           <Slider
             id="ppe-slider"
@@ -98,6 +82,34 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
             <span>₹50</span>
             <span>₹100</span>
           </div>
+        </div>
+        
+        {/* PPE presets */}
+        <div className="flex flex-wrap gap-2 mt-2">
+          <Button 
+            size="sm"
+            variant="outline"
+            className={`text-xs py-1 px-2 h-6 rounded border-purple-300 ${
+              ppeRate === 24 
+                ? "bg-purple-100 text-purple-700 border-purple-400" 
+                : "bg-white text-purple-600 hover:bg-purple-50"
+            }`}
+            onClick={() => handlePresetChange(24)}
+          >
+            General Goods (Average)
+          </Button>
+          <Button 
+            size="sm"
+            variant="outline"
+            className={`text-xs py-1 px-2 h-6 rounded border-purple-300 ${
+              ppeRate === 24 
+                ? "bg-purple-100 text-purple-700 border-purple-400" 
+                : "bg-white text-purple-600 hover:bg-purple-50"
+            }`}
+            onClick={() => handlePresetChange(24)}
+          >
+            Salary
+          </Button>
         </div>
       </div>
       <p className="text-xs text-gray-500 mt-4">Default: 24 INR per 1 USD</p>
