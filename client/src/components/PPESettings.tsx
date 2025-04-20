@@ -8,10 +8,29 @@ interface PPESettingsProps {
   onPPERateChange: (value: number) => void;
 }
 
+// Define the preset options
+type PresetOption = {
+  label: string;
+  value: number;
+};
+
+const PRESETS: PresetOption[] = [
+  { label: "General Goods (Average)", value: 24 },
+  { label: "Salary", value: 24 }
+];
+
 export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsProps) {
   const [inputValue, setInputValue] = useState<string>(ppeRate.toString());
+  const [selectedPreset, setSelectedPreset] = useState<string>("General Goods (Average)");
   
   // Update the input field when ppeRate prop changes
+  // Set General Goods as the default selection when component loads
+  useEffect(() => {
+    if (ppeRate === 24) {
+      setSelectedPreset("General Goods (Average)");
+    }
+  }, []);
+  
   useEffect(() => {
     setInputValue(ppeRate.toString());
   }, [ppeRate]);
@@ -24,6 +43,8 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
     const numericValue = parseFloat(val);
     if (!isNaN(numericValue) && numericValue >= 1 && numericValue <= 100) {
       onPPERateChange(numericValue);
+      // Clear selected preset when manually changing the value
+      setSelectedPreset("");
     }
   };
   
@@ -32,12 +53,15 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
     const newValue = value[0];
     setInputValue(newValue.toString());
     onPPERateChange(newValue);
+    // Clear selected preset when using the slider
+    setSelectedPreset("");
   };
   
   // PPE rate preset handler
-  const handlePresetChange = (value: number) => {
-    setInputValue(value.toString());
-    onPPERateChange(value);
+  const handlePresetChange = (preset: PresetOption) => {
+    setInputValue(preset.value.toString());
+    onPPERateChange(preset.value);
+    setSelectedPreset(preset.label);
   };
 
   return (
@@ -86,30 +110,21 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
         
         {/* PPE presets */}
         <div className="flex flex-wrap gap-2 mt-2">
-          <Button 
-            size="sm"
-            variant="outline"
-            className={`text-xs py-1 px-2 h-6 rounded border-purple-300 ${
-              ppeRate === 24 
-                ? "bg-purple-100 text-purple-700 border-purple-400" 
-                : "bg-white text-purple-600 hover:bg-purple-50"
-            }`}
-            onClick={() => handlePresetChange(24)}
-          >
-            General Goods (Average)
-          </Button>
-          <Button 
-            size="sm"
-            variant="outline"
-            className={`text-xs py-1 px-2 h-6 rounded border-purple-300 ${
-              ppeRate === 24 
-                ? "bg-purple-100 text-purple-700 border-purple-400" 
-                : "bg-white text-purple-600 hover:bg-purple-50"
-            }`}
-            onClick={() => handlePresetChange(24)}
-          >
-            Salary
-          </Button>
+          {PRESETS.map((preset) => (
+            <Button 
+              key={preset.label}
+              size="sm"
+              variant="outline"
+              className={`text-xs py-1 px-2 h-6 rounded border-purple-300 ${
+                selectedPreset === preset.label
+                  ? "bg-purple-600 text-white border-purple-700" 
+                  : "bg-white text-purple-600 hover:bg-purple-50"
+              }`}
+              onClick={() => handlePresetChange(preset)}
+            >
+              {preset.label}
+            </Button>
+          ))}
         </div>
       </div>
       <p className="text-xs text-gray-500 mt-4">Default: 24 INR per 1 USD</p>
