@@ -1,5 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
+import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 
 interface PPESettingsProps {
@@ -33,6 +34,12 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
     onPPERateChange(newValue);
   };
   
+  // PPE rate preset handler
+  const handlePresetChange = (value: number) => {
+    setInputValue(value.toString());
+    onPPERateChange(value);
+  };
+
   return (
     <div className="bg-purple-50 rounded-lg p-4 border border-purple-100">
       <h3 className="text-xs font-medium text-gray-700 mb-4">
@@ -59,6 +66,19 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
             </div>
           </div>
         </div>
+        
+        {/* PPE presets */}
+        <div className="flex flex-wrap gap-2">
+          <Button 
+            size="sm"
+            variant={ppeRate === 24 ? "default" : "outline"}
+            className="text-xs h-8 px-3 rounded-full"
+            onClick={() => handlePresetChange(24)}
+          >
+            General Goods (Average)
+          </Button>
+        </div>
+        
         <div className="w-full">
           <Slider
             id="ppe-slider"
