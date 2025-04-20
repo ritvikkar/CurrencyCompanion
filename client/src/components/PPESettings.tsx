@@ -15,19 +15,28 @@ type PresetOption = {
 };
 
 const PRESETS: PresetOption[] = [
-  { label: "General Goods (Average)", value: 24 },
-  { label: "Salary", value: 24 }
+  { label: "📦 General Goods (Average)", value: 24 },
+  { label: "🧾 Salary", value: 24 },
+  { label: "🏠 Housing & Rent", value: 40 },
+  { label: "🍽️ Food & Dining", value: 20 },
+  { label: "🚗 Transportation", value: 22 },
+  { label: "🛋️ Furniture & Household", value: 35 },
+  { label: "💻 Electronics & Imports", value: 80 },
+  { label: "🏥 Healthcare & Education", value: 18 },
+  { label: "🧹 Domestic Help", value: 18 },
+  { label: "👗 Clothing & Apparel", value: 28 },
+  { label: "🛍️ Luxury Goods & Travel", value: 80 }
 ];
 
 export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsProps) {
   const [inputValue, setInputValue] = useState<string>(ppeRate.toString());
-  const [selectedPreset, setSelectedPreset] = useState<string>("General Goods (Average)");
+  const [selectedPreset, setSelectedPreset] = useState<string>("📦 General Goods (Average)");
   
   // Update the input field when ppeRate prop changes
   // Set General Goods as the default selection when component loads
   useEffect(() => {
     if (ppeRate === 24) {
-      setSelectedPreset("General Goods (Average)");
+      setSelectedPreset("📦 General Goods (Average)");
     }
   }, []);
   
@@ -109,25 +118,27 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
         </div>
         
         {/* PPE presets */}
-        <div className="flex flex-wrap gap-2 mt-2">
-          {PRESETS.map((preset) => (
-            <Button 
-              key={preset.label}
-              size="sm"
-              variant="outline"
-              className={`text-xs py-1 px-3 h-6 rounded-md border-purple-300 transition-all duration-300 ease-in-out transform cursor-pointer ${
-                selectedPreset === preset.label
-                  ? "bg-purple-600 text-white border-purple-700 hover:bg-purple-800 hover:text-gray-50 hover:shadow-md hover:scale-105 hover:-translate-y-0.5" 
-                  : "bg-white text-purple-600 hover:bg-purple-50 hover:text-purple-800 hover:border-purple-400 hover:shadow hover:scale-105 hover:-translate-y-0.5"
-              }`}
-              onClick={() => handlePresetChange(preset)}
-            >
-              {preset.label}
-            </Button>
-          ))}
+        <div className="mt-2">
+          <h4 className="text-xs font-medium text-gray-600 mb-2">Spending Categories</h4>
+          <div className="flex flex-wrap gap-2">
+            {PRESETS.map((preset) => (
+              <Button 
+                key={preset.label}
+                size="sm"
+                variant="outline"
+                className={`text-xs py-1 px-3 h-6 rounded-md border-purple-300 transition-all duration-300 ease-in-out transform cursor-pointer ${
+                  selectedPreset === preset.label
+                    ? "bg-purple-600 text-white border-purple-700 hover:bg-purple-800 hover:text-gray-50 hover:shadow-md hover:scale-105 hover:-translate-y-0.5" 
+                    : "bg-white text-purple-600 hover:bg-purple-50 hover:text-purple-800 hover:border-purple-400 hover:shadow hover:scale-105 hover:-translate-y-0.5"
+                }`}
+                onClick={() => handlePresetChange(preset)}
+              >
+                {preset.label}
+              </Button>
+            ))}
+          </div>
         </div>
       </div>
-      <p className="text-xs text-gray-500 mt-4">Default: 24 INR per 1 USD</p>
     </div>
   );
 }
