@@ -32,8 +32,8 @@ export default function LiveRateInfo({ rate, isLoading, isError, timestamp }: Li
         <div className="text-xs text-gray-500 mb-2">
           {isLoading ? "Updating..." : (
             <>
-              Last updated: {formattedTimestamp} • 
-              <span className="ml-2">Data: <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">ExchangeRate-API.com</a></span>
+              Last updated: {formattedTimestamp}
+              <div>Data: <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">ExchangeRate-API.com</a></div>
             </>
           )}
         </div>
