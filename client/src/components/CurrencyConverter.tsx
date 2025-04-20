@@ -41,11 +41,13 @@ export default function CurrencyConverter() {
   // Calculate conversions when inputs or rates change
   useEffect(() => {
     if (direction === Direction.INRtoUSD && inrValue !== null) {
-      // Calculate USD from INR
-      setUsdValue(inrValue / forexRate);
+      // Calculate USD from INR with 2 decimal places
+      const convertedValue = Number((inrValue / forexRate).toFixed(2));
+      setUsdValue(convertedValue);
     } else if (direction === Direction.USDtoINR && usdValue !== null) {
-      // Calculate INR from USD
-      setInrValue(usdValue * forexRate);
+      // Calculate INR from USD with 2 decimal places
+      const convertedValue = Number((usdValue * forexRate).toFixed(2));
+      setInrValue(convertedValue);
     }
   }, [inrValue, usdValue, forexRate, direction]);
 
@@ -66,9 +68,9 @@ export default function CurrencyConverter() {
     setPpeRate(value);
   };
 
-  // Calculate PPE conversion values
-  const usdValuePPE = inrValue !== null ? inrValue / ppeRate : null;
-  const inrValuePPE = usdValue !== null ? usdValue * ppeRate : null;
+  // Calculate PPE conversion values with 2 decimal places
+  const usdValuePPE = inrValue !== null ? Number((inrValue / ppeRate).toFixed(2)) : null;
+  const inrValuePPE = usdValue !== null ? Number((usdValue * ppeRate).toFixed(2)) : null;
 
   // Prepare result texts based on direction
   const forexResultText = direction === Direction.INRtoUSD 
