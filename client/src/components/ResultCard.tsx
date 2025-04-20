@@ -29,7 +29,7 @@ export default function ResultCard({
       </h3>
       <div className="mb-4">
         <p className="text-lg font-semibold text-gray-900">
-          <span className="text-gray-600">{source}</span> <span className="px-4">=</span> <span className={textColor}>{target}</span>
+          <span className="text-gray-600">{source}</span> <span className="px-1">=</span> <span className={textColor}>{target}</span>
         </p>
         <p className="text-xs text-gray-500 mt-2">{description}</p>
       </div>

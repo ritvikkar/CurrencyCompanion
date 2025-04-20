@@ -58,7 +58,7 @@ export default function LiveRateInfo({ rate, isLoading, isError, timestamp }: Li
             </ul>
           </div>
           <div className="text-xs text-gray-500">
-            Using fallback rate: 1 USD <span className="px-4">=</span> ₹{formatCurrency(rate, "INR")} INR
+            Using fallback rate: 1 USD <span className="px-1">=</span> ₹{formatCurrency(rate, "INR")} INR
           </div>
         </div>
       )}
