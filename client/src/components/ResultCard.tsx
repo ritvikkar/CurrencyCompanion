@@ -29,21 +29,25 @@ export default function ResultCard({
   
   return (
     <div className={`bg-gradient-to-br ${gradientColors} rounded-lg border p-3 sm:p-4`}>
-      <div className="flex items-center mb-3 sm:mb-4 relative group">
+      <div className="flex items-center mb-3 sm:mb-4">
         <h3 className="text-xs sm:text-sm font-medium text-gray-700">
           {type === "forex" ? "Exchange Rate" : "Relative Rate"}
         </h3>
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          className={`h-3.5 w-3.5 sm:h-4 sm:w-4 ml-1 cursor-help opacity-70 ${iconColor}`} 
-          fill="none" 
-          viewBox="0 0 24 24" 
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <div className="absolute left-0 top-6 mt-1 p-2 w-64 max-w-[90vw] bg-white rounded-md shadow-lg border border-gray-200 text-xs text-gray-700 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-          {tooltipText}
+        <div className="relative inline-block group">
+          <div className={`h-3.5 w-3.5 sm:h-4 sm:w-4 ml-1 cursor-help opacity-70 ${iconColor} hover:opacity-100`}>
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-full w-full" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div className="absolute left-0 top-5 mt-1 p-2 w-64 max-w-[90vw] bg-white rounded-md shadow-lg border border-gray-200 text-xs text-gray-700 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none">
+            {tooltipText}
+          </div>
         </div>
       </div>
       <div className="mb-3 sm:mb-4">
