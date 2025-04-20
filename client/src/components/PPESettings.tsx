@@ -76,7 +76,7 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
   return (
     <div className="bg-purple-50 rounded-lg p-4 border border-purple-100">
       <h3 className="text-xs font-medium text-gray-700 mb-4">
-        Adjust PPE Rate
+        Adjust Relative Rate
       </h3>
       <div className="flex flex-col gap-4">
         <div className="relative">
@@ -117,7 +117,7 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
           </div>
         </div>
         
-        {/* PPE presets */}
+        {/* Relative rate presets */}
         <div className="mt-2">
           <h4 className="text-xs font-medium text-gray-600 mb-2">Spending Categories</h4>
           <div className="flex flex-wrap gap-2">

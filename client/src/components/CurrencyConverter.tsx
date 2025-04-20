@@ -140,16 +140,16 @@ export default function CurrencyConverter() {
             </div>
           </div>
           
-          {/* PPE Result Card with Settings Below */}
+          {/* Relative Rate Result Card with Settings Below */}
           <div className="space-y-4">
             <ResultCard
               type="ppe"
               resultText={ppeResultText}
-              rateText={`1 USD = ₹${formatCurrency(ppeRate, "INR")} INR (PPE)`}
-              description="Based on purchasing power equivalent"
+              rateText={`1 USD = ₹${formatCurrency(ppeRate, "INR")} INR (Relative)`}
+              description="Based on relative purchasing power"
             />
             
-            {/* PPE Settings below PPE Card */}
+            {/* Relative Rate Settings below Card */}
             <div className="mt-4">
               <PPESettings 
                 ppeRate={ppeRate} 
