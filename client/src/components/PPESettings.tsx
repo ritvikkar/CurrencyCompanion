@@ -75,9 +75,23 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
 
   return (
     <div className="bg-purple-50 rounded-lg p-4 border border-purple-100">
-      <h3 className="text-xs font-medium text-gray-700 mb-4">
-        Adjust Relative Rate
-      </h3>
+      <div className="flex items-center relative group mb-4">
+        <h3 className="text-xs font-medium text-gray-700">
+          Adjust Relative Rate
+        </h3>
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          className="h-3.5 w-3.5 ml-1 cursor-help opacity-70 text-purple-500" 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <div className="absolute top-0 left-full ml-2 p-2 w-64 bg-white rounded-md shadow-lg border border-gray-200 text-xs text-gray-700 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+          The relative rate adjusts the conversion based on the actual purchasing power in each country. Unlike the market exchange rate, it accounts for local price differences and cost of living variations.
+        </div>
+      </div>
       <div className="flex flex-col gap-4">
         <div className="relative">
           <div className="relative rounded-md shadow-sm">
@@ -119,7 +133,21 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
         
         {/* Relative rate presets */}
         <div className="mt-2">
-          <h4 className="text-xs font-medium text-gray-600 mb-2">Spending Categories</h4>
+          <div className="flex items-center relative group mb-2">
+            <h4 className="text-xs font-medium text-gray-600">Spending Categories</h4>
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-3.5 w-3.5 ml-1 cursor-help opacity-70 text-purple-500" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div className="absolute top-full left-0 mt-1 p-2 w-64 bg-white rounded-md shadow-lg border border-gray-200 text-xs text-gray-700 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              These are category-specific relative rates that reflect how prices differ between the US and India for particular types of goods and services. Select the category most relevant to your needs.
+            </div>
+          </div>
           <div className="flex flex-wrap gap-2">
             {PRESETS.map((preset) => (
               <Button 
