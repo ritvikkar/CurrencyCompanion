@@ -24,13 +24,14 @@ export default function CurrencyConverter() {
   // Track which input was last modified
   const [direction, setDirection] = useState<Direction>(Direction.INRtoUSD);
 
-  // Fetch exchange rate
+  // Fetch exchange rate directly from the external API
   const { 
     data: exchangeRateData, 
     isLoading, 
     isError 
   } = useQuery({
-    queryKey: ['/api/exchange-rate'],
+    queryKey: ['exchangeRate'],
+    queryFn: fetchExchangeRate,
     staleTime: 1000 * 60 * 5, // Refresh every 5 minutes
   });
 

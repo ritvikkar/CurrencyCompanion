@@ -2,6 +2,21 @@
 // API endpoints for currency conversion
 const EXCHANGE_RATE_API_URL = "https://open.er-api.com/v6/latest/USD";
 
+interface ExchangeRateAPIResponse {
+  result: string;
+  provider: string;
+  documentation: string;
+  terms_of_use: string;
+  time_last_update_unix: number;
+  time_last_update_utc: string;
+  time_next_update_unix: number;
+  time_next_update_utc: string;
+  base_code: string;
+  rates: {
+    [key: string]: number;
+  };
+}
+
 interface ExchangeRateResponse {
   rate: number;
   timestamp: string;
@@ -23,9 +38,21 @@ export async function fetchExchangeRate(): Promise<ParsedExchangeRate> {
       throw new Error(`Error fetching exchange rate: ${response.status}`);
     }
     
-    const data = await response.json();
+    const data: ExchangeRateAPIResponse = await response.json();
     
-    return data;
+    // Verify the API response format
+    if (data.result !== "success" || !data.rates || !data.rates.INR) {
+      throw new Error("Invalid response format from exchange rate API");
+    }
+    
+    // Transform the data to match our expected format
+    return {
+      rate: data.rates.INR,
+      timestamp: new Date(data.time_last_update_utc).toISOString(),
+      base: data.base_code,
+      nextUpdate: data.time_next_update_utc,
+      provider: data.provider
+    };
   } catch (error) {
     console.error("Failed to fetch exchange rate:", {
       error,
@@ -36,8 +63,7 @@ export async function fetchExchangeRate(): Promise<ParsedExchangeRate> {
       rate: 85.49, // Fallback rate
       timestamp: new Date().toISOString(),
       base: "USD",
-      fallback: true,
-      error: error instanceof Error ? error.message : 'Unknown error'
+      fallback: true
     };
   }
 }
