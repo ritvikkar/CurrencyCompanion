@@ -15,8 +15,8 @@ type PresetOption = {
 };
 
 const PRESETS: PresetOption[] = [
-  { label: "📦 General Goods (Average)", value: 20 },
-  { label: "🧾 Salary", value: 10 },
+  { label: "📦 General Goods (Average)", value: 24 },
+  { label: "🧾 Salary", value: 24 },
   { label: "🏠 Housing & Rent", value: 10 },
   { label: "🍽️ Food & Dining", value: 10 },
   { label: "🚗 Transportation", value: 15 },
@@ -35,7 +35,7 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
   // Update the input field when ppeRate prop changes
   // Set General Goods as the default selection when component loads
   useEffect(() => {
-    if (ppeRate === 20) {
+    if (ppeRate === 24) {
       setSelectedPreset("📦 General Goods (Average)");
     }
   }, []);
