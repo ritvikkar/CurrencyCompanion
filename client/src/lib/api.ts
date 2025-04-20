@@ -1,5 +1,6 @@
+
 // API endpoints for currency conversion
-const EXCHANGE_RATE_API_ENDPOINT = "/api/exchange-rate";
+const EXCHANGE_RATE_API_URL = "https://open.er-api.com/v6/latest/USD";
 
 interface ExchangeRateResponse {
   rate: number;
@@ -13,21 +14,31 @@ interface ExchangeRateResponse {
 // Define the type for our exchange rate response
 export type ParsedExchangeRate = ExchangeRateResponse;
 
-// Function to fetch the exchange rate from the backend
+// Function to fetch the exchange rate directly from external API
 export async function fetchExchangeRate(): Promise<ParsedExchangeRate> {
   try {
-    const response = await fetch(EXCHANGE_RATE_API_ENDPOINT);
+    const response = await fetch(EXCHANGE_RATE_API_URL);
     
     if (!response.ok) {
       throw new Error(`Error fetching exchange rate: ${response.status}`);
     }
     
-    const data: ExchangeRateResponse = await response.json();
+    const data = await response.json();
     
-    // Return the parsed data
-    return data;
+    return {
+      rate: data.rates.INR,
+      timestamp: data.time_last_update_utc,
+      base: data.base_code,
+      nextUpdate: data.time_next_update_utc,
+      provider: data.provider
+    };
   } catch (error) {
     console.error("Failed to fetch exchange rate:", error);
-    throw error;
+    return {
+      rate: 85.49, // Fallback rate
+      timestamp: new Date().toISOString(),
+      base: "USD",
+      fallback: true
+    };
   }
 }
