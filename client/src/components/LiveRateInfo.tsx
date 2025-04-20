@@ -39,8 +39,13 @@ export default function LiveRateInfo({
     statusColor = "bg-yellow-500";
     statusText = "Loading exchange rates...";
   } else if (isError) {
-    statusColor = "bg-red-500";
-    statusText = "Using fallback rates";
+    if (exchangeRateData?.cachedData) {
+      statusColor = "bg-orange-400";
+      statusText = "Using cached rate";
+    } else {
+      statusColor = "bg-red-500";
+      statusText = "Using fallback rates";
+    }
   }
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -185,20 +190,34 @@ export default function LiveRateInfo({
       
       {isError && !isRateOverridden && (
         <div className="mt-3 sm:mt-4 space-y-1 sm:space-y-2">
-          <div className="flex items-center text-[10px] sm:text-xs text-red-600">
-            <AlertCircle className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 flex-shrink-0" />
-            <span>Could not connect to exchange rate API. Using fallback rate.</span>
-          </div>
+          {exchangeRateData?.cachedData ? (
+            <>
+              <div className="flex items-center text-[10px] sm:text-xs text-orange-600">
+                <AlertCircle className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 flex-shrink-0" />
+                <span>Could not connect to exchange rate API. Using previously cached rate.</span>
+              </div>
+              <div className="text-[10px] sm:text-xs text-gray-500">
+                <span>Cache updated: {formattedTimestamp}</span>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex items-center text-[10px] sm:text-xs text-red-600">
+                <AlertCircle className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 flex-shrink-0" />
+                <span>Could not connect to exchange rate API. Using default fallback rate.</span>
+              </div>
+              <div className="text-[10px] sm:text-xs text-gray-500">
+                <span>Possible causes:</span>
+                <ul className="list-disc ml-4 mt-1 sm:mt-2">
+                  <li>CORS policy blocking the request</li>
+                  <li>Rate limit exceeded (100 requests/month for free tier)</li>
+                  <li>API service temporarily unavailable</li>
+                </ul>
+              </div>
+            </>
+          )}
           <div className="text-[10px] sm:text-xs text-gray-500">
-            <span>Possible causes:</span>
-            <ul className="list-disc ml-4 mt-1 sm:mt-2">
-              <li>CORS policy blocking the request</li>
-              <li>Rate limit exceeded (100 requests/month for free tier)</li>
-              <li>API service temporarily unavailable</li>
-            </ul>
-          </div>
-          <div className="text-[10px] sm:text-xs text-gray-500">
-            Using fallback rate: 1 USD <span className="px-1">=</span> ₹{formatCurrency(rate, "INR")} INR
+            Using rate: 1 USD <span className="px-1">=</span> ₹{formatCurrency(rate, "INR")} INR
           </div>
         </div>
       )}

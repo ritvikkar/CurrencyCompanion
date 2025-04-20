@@ -8,7 +8,8 @@ A React-based currency converter that provides both real-time forex exchange rat
 
 ## Features
 
-- **Live Exchange Rate**: Fetches real-time forex exchange rates from ExchangeRate-API with automatic fallback on API failure
+- **Live Exchange Rate**: Fetches real-time forex exchange rates from ExchangeRate-API
+- **Cache System**: Stores the latest successful exchange rate fetch locally, using it automatically when API calls fail
 - **Custom Rate Override**: Override market rates with custom values for situations like airport currency exchanges
 - **Purchasing Power Equivalent**: Customizable relative rate with category presets for different spending types
 - **Bidirectional Conversion**: Convert seamlessly from INR to USD or USD to INR with automatic syncing
@@ -29,8 +30,10 @@ A React-based currency converter that provides both real-time forex exchange rat
 The application uses [ExchangeRate-API](https://www.exchangerate-api.com) (free tier) to fetch real-time market exchange rates:
 - No API key is required for the free tier
 - Limited to 100 requests per month
-- Fallback mechanism in place with a default rate of 83 INR = 1 USD if API fails
 - Exchange rates update every 24 hours on the free tier
+- Robust fallback mechanism:
+  1. First tries to use previously cached exchange rates from local storage
+  2. If no cached data is available, falls back to a default rate of 83 INR = 1 USD
 
 ## Relative Rate (PPE) Presets
 
@@ -79,7 +82,9 @@ These values represent the approximate purchasing power equivalence for differen
 ## Development Notes
 
 - The application is built using a minimal backend approach, with most logic in the frontend
-- Exchange rate data is cached for 5 minutes using React Query to minimize API calls
+- Two-layer caching strategy:
+  - API responses are cached for 5 minutes using React Query to minimize requests
+  - Successfully fetched exchange rates are also saved to localStorage for persistent fallback
 - No environment variables or API keys are required to run the application
 - The project uses TypeScript for type safety and better development experience
 
