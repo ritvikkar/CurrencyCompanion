@@ -72,12 +72,12 @@ export default function CurrencyConverter() {
 
   // Prepare result texts based on direction
   const forexResultText = direction === Direction.INRtoUSD 
-    ? `₹${formatCurrency(inrValue)} = $${formatCurrency(usdValue || 0)}`
-    : `$${formatCurrency(usdValue || 0)} = ₹${formatCurrency(inrValue)}`;
+    ? `₹${formatCurrency(inrValue, "INR")} = $${formatCurrency(usdValue || 0)}`
+    : `$${formatCurrency(usdValue || 0)} = ₹${formatCurrency(inrValue, "INR")}`;
   
   const ppeResultText = direction === Direction.INRtoUSD
-    ? `₹${formatCurrency(inrValue)} = $${formatCurrency(usdValuePPE)}`
-    : `$${formatCurrency(usdValue || 0)} = ₹${formatCurrency(inrValuePPE)}`;
+    ? `₹${formatCurrency(inrValue, "INR")} = $${formatCurrency(usdValuePPE)}`
+    : `$${formatCurrency(usdValue || 0)} = ₹${formatCurrency(inrValuePPE, "INR")}`;
 
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden p-6">
@@ -121,7 +121,7 @@ export default function CurrencyConverter() {
             <ResultCard
               type="forex"
               resultText={forexResultText}
-              rateText={`1 USD = ₹${forexRate.toFixed(2)} INR`}
+              rateText={`1 USD = ₹${formatCurrency(forexRate, "INR")} INR`}
               description="Based on current exchange rate"
             />
             
@@ -141,7 +141,7 @@ export default function CurrencyConverter() {
             <ResultCard
               type="ppe"
               resultText={ppeResultText}
-              rateText={`1 USD = ₹${ppeRate.toFixed(2)} INR (PPE)`}
+              rateText={`1 USD = ₹${formatCurrency(ppeRate, "INR")} INR (PPE)`}
               description="Based on purchasing power equivalent"
             />
             

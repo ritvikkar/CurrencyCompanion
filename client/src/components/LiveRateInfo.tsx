@@ -1,5 +1,5 @@
 import { AlertCircle } from "lucide-react";
-import { formatDate } from "@/lib/utils";
+import { formatDate, formatCurrency } from "@/lib/utils";
 
 interface LiveRateInfoProps {
   rate: number;
@@ -53,7 +53,7 @@ export default function LiveRateInfo({ rate, isLoading, isError, timestamp }: Li
             </ul>
           </div>
           <div className="text-xs text-gray-500">
-            Using fallback rate: 1 USD = ₹{rate.toFixed(2)} INR
+            Using fallback rate: 1 USD <span className="px-1">=</span> ₹{formatCurrency(rate, "INR")} INR
           </div>
         </div>
       )}
