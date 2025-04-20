@@ -71,8 +71,12 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
         <div className="flex flex-wrap gap-2">
           <Button 
             size="sm"
-            variant={ppeRate === 24 ? "default" : "outline"}
-            className="text-xs h-8 px-3 rounded-full"
+            variant="outline"
+            className={`text-xs py-1 px-2 h-6 rounded border-purple-300 ${
+              ppeRate === 24 
+                ? "bg-purple-100 text-purple-700 border-purple-400" 
+                : "bg-white text-purple-600 hover:bg-purple-50"
+            }`}
             onClick={() => handlePresetChange(24)}
           >
             General Goods (Average)
