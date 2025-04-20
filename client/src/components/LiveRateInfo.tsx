@@ -122,24 +122,25 @@ export default function LiveRateInfo({
           </div>
           <div className="flex items-center space-x-1">
             <div className="relative flex-1">
-              <div className="absolute inset-y-0 left-0 pl-2 sm:pl-3 flex items-center pointer-events-none">
-                <span className="text-gray-500 text-[10px] sm:text-xs">1 USD =</span>
+              <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
+                <span className="text-gray-500 text-[10px] sm:text-xs">1 USD</span>
+                <span className="text-gray-500 text-[10px] sm:text-xs mx-1">=</span>
               </div>
               <Input
                 type="number"
                 step="0.01"
                 min="0.01"
-                className="pl-12 sm:pl-14 pr-10 h-7 text-xs"
+                className="pl-14 sm:pl-16 pr-10 sm:pr-12 py-1 sm:py-2 h-7 sm:h-8 text-xs sm:text-sm"
                 value={customRate}
                 onChange={handleInputChange}
               />
-              <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+              <div className="absolute inset-y-0 right-0 pr-3 sm:pr-4 flex items-center pointer-events-none">
                 <span className="text-gray-500 text-[10px] sm:text-xs">INR</span>
               </div>
             </div>
             <Button 
               size="sm" 
-              className="h-7 w-7 p-0 bg-green-500 hover:bg-green-600" 
+              className="h-7 sm:h-8 w-7 sm:w-8 p-0 bg-green-500 hover:bg-green-600" 
               onClick={applyCustomRate}
             >
               <Check className="h-3 w-3" />
@@ -147,7 +148,7 @@ export default function LiveRateInfo({
             <Button 
               size="sm" 
               variant="outline" 
-              className="h-7 w-7 p-0 border-red-200 text-red-500" 
+              className="h-7 sm:h-8 w-7 sm:w-8 p-0 border-red-200 text-red-500" 
               onClick={cancelEditing}
             >
               <X className="h-3 w-3" />
