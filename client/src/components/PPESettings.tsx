@@ -90,7 +90,7 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
               type="number"
               min={1}
               max={100}
-              className="pl-16 pr-12 py-2 h-8 text-sm cursor-pointer"
+              className="pl-16 pr-12 py-2 h-8 text-sm"
               value={inputValue}
               onChange={handleInputChange}
             />
