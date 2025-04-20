@@ -91,7 +91,14 @@ export default function CurrencyConverter() {
 
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden p-4 sm:p-6 md:p-8">
-      <h1 className="text-xl sm:text-2xl font-bold text-center mb-6 md:mb-8 text-gray-800">INR/USD Currency Converter</h1>
+      <div className="flex items-center justify-center mb-6 md:mb-8">
+        <img 
+          src="/currency-icon.png" 
+          alt="Currency Icon" 
+          className="w-8 h-8 sm:w-10 sm:h-10 mr-3"
+        />
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-800">INR &lt;&gt; USD Converter</h1>
+      </div>
       
       {/* Input Section */}
       <div className="mb-6 md:mb-8">
