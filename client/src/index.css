@@ -13,6 +13,16 @@
     opacity: 1;
   }
   
+  /* Better tooltip positioning */
+  .group {
+    position: relative;
+  }
+  
+  /* Fix z-index stacking for tooltips */
+  .z-20 {
+    z-index: 20;
+  }
+  
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;

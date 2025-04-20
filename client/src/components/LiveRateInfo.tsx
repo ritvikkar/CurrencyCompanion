@@ -39,7 +39,7 @@ export default function LiveRateInfo({ rate, isLoading, isError, timestamp }: Li
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <div className="absolute top-0 left-0 sm:right-0 sm:left-auto mt-6 p-2 w-[calc(100vw-2rem)] sm:w-64 max-w-xs bg-white rounded-md shadow-lg border border-gray-200 text-[10px] sm:text-xs text-gray-700 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+          <div className="absolute left-0 top-6 p-2 w-[calc(100vw-2rem)] sm:w-64 max-w-xs bg-white rounded-md shadow-lg border border-gray-200 text-[10px] sm:text-xs text-gray-700 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
             This shows the real-time exchange rate from a financial data provider. The market exchange rate is what banks and currency exchanges use for transactions. It fluctuates based on global economic factors and market conditions.
           </div>
         </div>
