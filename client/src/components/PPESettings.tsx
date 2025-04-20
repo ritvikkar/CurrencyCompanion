@@ -42,14 +42,15 @@ export default function PPESettings({ ppeRate, onPPERateChange }: PPESettingsPro
         <div className="relative">
           <div className="relative rounded-md shadow-sm">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <span className="text-gray-500 text-xs">1 USD <span className="px-4">=</span></span>
+              <span className="text-gray-500 text-xs">1 USD</span>
+              <span className="text-gray-500 text-xs mx-4">=</span>
             </div>
             <Input
               id="ppe-rate"
               type="number"
               min={1}
               max={100}
-              className="pl-20 pr-12 py-2 h-8 text-sm"
+              className="pl-24 pr-12 py-2 h-8 text-sm"
               value={inputValue}
               onChange={handleInputChange}
             />
